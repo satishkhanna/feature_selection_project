@@ -14,7 +14,11 @@ def percentile_k_features (df,k=20):
     fs = SelectPercentile(f_regression, percentile=k)
     fs.fit_transform(X, y)
     support = fs.get_support()
+    h = fs.scores_
+    temp1 = h[support]
     full_set = X.columns.values
-    temp = full_set[support]
-    finallist = temp.tolist()
-    return finallist
+    temp2 = full_set[support]
+    finallist1 = temp1.tolist()
+    finallist2 = temp2.tolist()
+    z = [x for _,x in sorted(zip(finallist1,finallist2),reverse=True)]
+    return z
